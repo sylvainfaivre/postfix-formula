@@ -37,11 +37,10 @@ postfix-init-service-running-postfix:
 {%- if salt['pillar.get']('postfix:reload_service', True) %}
 # Restart postfix if the package was changed.
 # This also provides an ID to be used in a watch_in statement.
-postfix-init-service-running-postfix-restart:
-  service.running:
-    - name: postfix
-    - watch:
-      - pkg: postfix-init-pkg-installed-postfix
+service.running:
+  - name: postfix
+  - watch:
+    - pkg: postfix-init-pkg-installed-postfix
 {%- endif %}
 
 {# Used for newaliases, postalias and postconf #}
